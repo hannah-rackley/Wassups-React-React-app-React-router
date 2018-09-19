@@ -1,5 +1,6 @@
 import WassupForm from'./WassupForm';
 import React from 'react';
+import { connect } from 'react-redux';
 
 class WassupFormContainer extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class WassupFormContainer extends React.Component {
     render() {
         let handleSubmit = (event) => {
             event.preventDefault();
-            this.props.addWassup({ content: this.state.newWassup, user: this.state.user });
+            this.props.dispatch({ type: 'ADD_WASSUP', content: this.state.newWassup, user: this.state.user});
             this.setState({ newWassup: "" });
         }
         let handleNewWassup = (event) => this.setState({ newWassup: event.target.value });
@@ -20,5 +21,6 @@ class WassupFormContainer extends React.Component {
         return <WassupForm handleSubmit={handleSubmit} handleNewUser={handleNewUser} handleNewWassup={handleNewWassup} user={this.state.user} newWassup={this.state.newWassup}/>
     }
 }
+let SmartForm = connect()(WassupFormContainer);
 
-export default WassupFormContainer;
+export default SmartForm;

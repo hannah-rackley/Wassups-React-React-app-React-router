@@ -2,70 +2,77 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import Homepage from './Homepage.js'
-import { HashRouter, Route, NavLink, Switch } from 'react-router-dom';
-import WassupPageContainer from './WassupPage.js';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducer.js'
+import SmartRouter from './router.js'
 
-const About = props => <h1>About</h1>
-const NavBar = props => <div>
-    <NavLink activeStyle={{fontWeight: 'bold'}} to="/home">Home</NavLink>
-    <NavLink activeStyle={{fontWeight: 'bold'}} to="/about">About</NavLink>
-    <NavLink activeStyle={{fontWeight: 'bold'}} to="/contact">Contact</NavLink>
-</div>
+const wassups = [ 
+    {
+        "user": 'Michael',
+        "id": 6,
+        "content": "If I had a gun with two bullets and I was in a room with Hitler, Bin Laden, and Toby, I would shoot Toby twice.",
+    },
+    {
+        "user": 'Jim',
+        "id": 5,
+        "content": "Beets, Bears, Battlestar Galactica."
+    },
+    {
+        "user": 'Kelly',
+        "id": 4,
+        "content": "I have alot of questions. Number one, how dare you?"
+    },
+    {
+        "user": 'Andy',
+        "id": 3,
+        "content": "Sorry I annoyed you with my friendship."
+    },
+    {
+        "user": 'Pam',
+        "id": 2,
+        "content": "I feel God in this Chili’s tonight."
+    },
+    {
+        "user": 'Dwight',
+        "id": 1,
+        "content": "Whenever I'm about to do something, I think, 'Would an idiot do that?' And if they would, I do not do that thing."
+    },
+    {
+        "user": "Michael",
+        "id": 0,
+        "content": "Would I rather be feared or loved? Easy. Both. I want people to be afraid of how much they love me."
+    }
+]
 
-const Contact = props => <h1>Contact Me!</h1>
+    // componentDidMount() {
+    //     fetch('http://0.tcp.ngrok.io:11140/wassups.json')
+    //         .then(response => {
+    //             return response.json();
+    //         })
+    //         .then(wassups => {
+    //             this.setState({ wassups: wassups })
+    //          });
+    // }
+    // render() {
+    //     return <Router addWassup={addWassup} wassups={this.state.wassups}/>
+    // }
 
-const Router = props => {
-    return (
-       <HashRouter>
-           <div>
-               <NavBar></NavBar>
-               <Switch>
-                   <Route exact path='/home' render={(otherProps) => <Homepage {...props} {...otherProps}/>}/>
-                   <Route path='/about' component={About}/>
-                   <Route path='/contact' component={Contact}/>
-                   <Route exact path='/home/:id' render={(otherProps) => <WassupPageContainer {...props} {...otherProps}/>}/>
-               </Switch>
-           </div>
-       </HashRouter>
-    )
+let initialState = {
+    wassups: wassups,
+    id: 7
 }
 
-class MyApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            wassups: [],
-            id: 4
-        }
-    }
-    componentDidMount() {
-        fetch('http://0.tcp.ngrok.io:11140/wassups.json')
-            .then(response => {
-                return response.json();
-            })
-            .then(wassups => {
-                this.setState({ wassups: wassups })
-             });
-    }
-    render() {
-        let addWassup = (props) => {
-            this.setState({
-                id: this.state.id += 1
-            })
-            this.setState({ 
-                wassups: [
-                    {
-                        user: props.user,
-                        id: this.state.id,
-                        content: props.content
-                    }
-                ].concat(this.state.wassups)
-             })
-        }
-        return <Router addWassup={addWassup} wassups={this.state.wassups}/>
-    }
-}
+const state = createStore(
+    reducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
-ReactDOM.render(<MyApp />, document.getElementById('root'));
+const myApp =
+  <Provider store={state}>
+      <SmartRouter />
+  </Provider>
+
+ReactDOM.render(myApp, document.getElementById('root'));
 registerServiceWorker();
+
+export default state;
