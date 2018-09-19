@@ -18,7 +18,7 @@ class Homepage extends React.Component {
             <div className="homepage">
                 <h1>Wassup</h1>
                 <SmartForm/>
-                <WassupList wassups={this.props.wassups}/>
+                <WassupList />
             </div>)
     }
 }

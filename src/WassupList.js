@@ -21,6 +21,6 @@ let WassupList = props =>
         })}
     </div>;
 
-let SmartWassupList = connect()(WassupList);
+let SmartWassupList = connect(state => state)(WassupList);
 
 export default SmartWassupList;
