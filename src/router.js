@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 const About = props => <h1>About</h1>
-const NavBar = props => <div>
+const NavBar = props => <div className='navbar'>
     <NavLink activeStyle={{fontWeight: 'bold'}} to="/home">Home</NavLink>
     <NavLink activeStyle={{fontWeight: 'bold'}} to="/about">About</NavLink>
     <NavLink activeStyle={{fontWeight: 'bold'}} to="/contact">Contact</NavLink>
@@ -17,7 +17,7 @@ const Router = props => {
     return (
        <HashRouter>
            <div>
-               <NavBar></NavBar>
+               <NavBar ></NavBar>
                <Switch>
                    <Route exact path='/home' render={(otherProps) => <Homepage {...props} {...otherProps}/>}/>
                    <Route path='/about' component={About}/>

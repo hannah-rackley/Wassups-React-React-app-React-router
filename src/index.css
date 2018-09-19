@@ -1,7 +1,8 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #C5C5C5;
 }
 .homepage {
   display: flex;
@@ -13,6 +14,29 @@ body {
 
 .rows {
   padding: 2em 20em;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #4C5B61;
+  height: 2em;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+} 
+button {
+  background-color: #4C5B61;
+  color: white;
+  max-width: fit-content;
 }
 
 .author {

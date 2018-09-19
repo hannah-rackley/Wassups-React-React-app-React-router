@@ -9,11 +9,13 @@ let WassupList = props =>
             return (
                 <div className='rows' key={wassup.id}>
                     <WassupRow wassup={wassup}/>
-                    <Link to={`/home/${wassup.id}`}>Full page!</Link>
-                    <button onClick={() => {
-                        props.dispatch({ type: 'REMOVE_WASSUP', id: wassup.id })
-                    }
-                    }>Delete</button>
+                    <div className="column">
+                        <Link to={`/home/${wassup.id}`}>Full page!</Link>
+                        <button onClick={() => {
+                            props.dispatch({ type: 'REMOVE_WASSUP', id: wassup.id })
+                        }
+                        }>Delete</button>
+                    </div>
                 </div>
             )
         })}
