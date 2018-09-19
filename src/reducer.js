@@ -15,6 +15,11 @@ const reducer = (oldState, action) => {
             ...oldState, 
             wassups: oldState.wassups.filter(wassup => wassup.id !== action.id)
         }
+    } else if (action.type === "LOAD_WASSUPS") {
+        return {
+            ...oldState, 
+            wassups: action.wassups
+        }
     } else {
         return oldState;
     }
